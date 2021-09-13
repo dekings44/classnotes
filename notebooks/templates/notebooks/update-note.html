@@ -1,0 +1,30 @@
+{% extends '../base/base.html' %}
+{% block title %}Update Note{% endblock title %}
+
+{% block content %}
+<div class="container-sm mt-2 col-4">
+    {% if user.id == note.author.id %}
+    <h3>Update {{ note.note_topic }}</h3>
+    <div class="form-group">
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <!-- Security token -->
+            {% csrf_token %}
+
+            <!-- Using the formset -->
+            {{ form.as_p }}
+
+            <input class="btn btn-secondary" type="submit" value="Update">
+        </form>
+        {% else %}
+        <div class="container mt-5">
+            <p>You do not have permission to update this note. </p>
+            <h4>Please login.</h4>
+        </div>
+
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

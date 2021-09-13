@@ -1,0 +1,21 @@
+{% extends '../base/base.html' %}
+{% block title %}A New Note{% endblock title %}
+
+{% block content %}
+<div class="container-sm mt-2 col-4">
+    <h3>Add A New Note</h3>
+    <div class="form-group">
+        <form method="POST" enctype="multipart/form-data">
+
+            <!-- Security token -->
+            {% csrf_token %}
+
+            <!-- Using the formset -->
+            {{ form.as_p }}
+
+            <input class="btn btn-secondary" type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

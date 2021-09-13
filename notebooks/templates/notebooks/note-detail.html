@@ -1,0 +1,29 @@
+{% extends '../base/base.html' %}
+
+{% block title %} Detail of Notes {% endblock title %}
+
+{% block content %}
+
+
+<div class="container card mb-3 mt-4">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card-body card-text">
+        <h5 class="card-title">{{ note.note_topic }}</h5>
+        <small class="card-text">{{ note.category.name}} | {{ note.author.username }} {{ note.author.id }}</small>
+        <p class="card-text">{{ note.note_body }}</p>
+        <p class="card-text"><small class="text-muted">Published: {{ note.created_at|date }}</small></p>
+        <p class="card-text"><small class="text-muted">Date: {{ time|date }}</small></p>
+        {% if user.id == note.author.id %}
+        <p><a class="text-decoration-none read_more_btn" href="{% url 'notes:update' note.pk %}"><button type="button"
+              class="read_more_btn">Edit</button></a></p>
+        <p><a class="text-decoration-none read_more_btn" href="{% url 'notes:delete' note.pk %}"><button type="button"
+              class="read_more_btn">Delete</button></a></p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

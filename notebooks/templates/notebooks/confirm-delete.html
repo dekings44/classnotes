@@ -1,0 +1,27 @@
+{% extends '../base/base.html' %}
+{% block title %}Confirm Delete{% endblock title %}
+
+{% block content %}
+<div class="container-sm mt-2 col-4">
+    <h1>Confirm Billionaires Delete</h1>
+    <div class="form-group">
+        {% if user.id == note.author.id %}
+        <form method="POST" enctype="multipart/form-data">
+
+            <!-- Security token -->
+            {% csrf_token %}
+
+            <p>Are you sure you want to delete <strong>{{ note.note_topic }}</strong>?</p>
+
+            <input class="btn btn-secondary" type="submit" value="Delete">
+        </form>
+        {% else %}
+        <div class="container mt-5">
+            <p><strong>How did you get here?</strong> <br> You do not have permission to delete this note. </p>
+            <h4>Please login.</h4>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

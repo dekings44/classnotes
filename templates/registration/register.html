@@ -1,0 +1,50 @@
+{% load static %}
+
+
+<head>
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static '/css/register.css' %}">
+</head>
+
+
+
+
+{% block content %}
+<div class="container">
+    {% if form.errors %}
+    <small>Please correct the following errors:</small>
+    {% for field in form %}
+    {% if field.errors %}
+    <p>{{ field.label}}: {{ field.errors|striptags }}</p>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    <form id="form" class="register-form" action="" method="POST">
+        {% csrf_token %}
+        <h2>Please Join Us</h2>
+        <div class="form-control">
+            <label for="username"> Username </label>
+            {{ form.username }}
+            <small>Error message</small>
+        </div>
+        <div class="form-control">
+            <label for="email"> Email </label>
+            {{ form.email }}
+            <small>Error message</small>
+        </div>
+        <div class="form-control">
+            <label for="password"> Password </label>
+            {{ form.password }}
+            <small>Error message</small>
+        </div>
+        <div class="form-control">
+            <label for="password2"> Confirm Password </label>
+            {{ form.password2 }}
+            <small>Error message</small>
+        </div>
+        <button type="submit">Submit</button>
+
+    </form>
+
+</div>
+
+{% endblock %}
