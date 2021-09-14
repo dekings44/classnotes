@@ -25,7 +25,7 @@ def loginUser(request):
         
         if user is not None:
             login(request, user)
-            return redirect('notebooks:notebooks')
+            return redirect('accounts:profile')
         
     return render(request, 'registration/login.html')
     
