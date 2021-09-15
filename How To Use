@@ -1,0 +1,10 @@
+## How to use
+
+``` git clone https://github.com/dekings44/classnotes.git
+cd classnotes/classroom
+virtualenv -p python3.9 venv 
+source venv/bin/activate
+pip install -r requirements.txt
+cd django_rest_imageupload_backend
+python manage.py migrate  # if you are using SQLite, else, configure your database of choice, create database before running migration
+python manage.py runserver # starts the server
