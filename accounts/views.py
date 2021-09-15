@@ -5,13 +5,38 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import RegisterForm
 from django.contrib import messages
+from .models import MyFollower
 
 # Create your views here.
 
 
+
+
+
+
+
+
+
 @login_required
 def profile(request):
-    return render(request,'accounts/profile.html', {'section' : 'profile'})
+    current_user = request.GET.get('user')
+    all_users = User.objects.all()
+    logged_in_user = request.user.username
+    user_followers = len(MyFollower.objects.filter(user=current_user))
+    user_following = len(MyFollower.objects.filter(follower=current_user))
+    return render(request,'accounts/profile.html', {'section' : 'profile', 'current_user' : current_user, 'all_users' : all_users})
+    
+    
+    
+def myFollowers(request):
+    if request.method == 'POST':
+        value = request.POST['value']
+        user = request.POST['user']
+        follower = request.POST['follower']
+        if value == 'follow':
+            follow_cnt = MyFollower.objects.create(follower = follower, user = user)
+            follow_cnt.save()
+        return redirect('/?user='+user)
     
     
     

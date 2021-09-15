@@ -7,6 +7,7 @@ from .forms import UserLogin
 app_name = 'accounts'
 
 urlpatterns = [
+    path('profile/myfollowers', views.myFollowers, name = 'myfollowers'),
     path('login/', views.loginUser, name = 'login'),
     path('logout/', views.logoutUser, name = 'logout'),
     path('register/', views.account_register, name = 'register'),
